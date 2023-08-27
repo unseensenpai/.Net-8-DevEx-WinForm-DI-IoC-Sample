@@ -70,16 +70,29 @@ namespace IoC.DI.WinForm.Sample
             //Application.Run(new Container());
         }
 
+        /// <summary>
+        /// Configure and register logger service.
+        /// </summary>
+        /// <param name="logging"></param>
         private static void ConfigureLogger(Microsoft.Extensions.Logging.ILoggingBuilder logging)
         {
             logging.Services.AddSingleton<ILogger, Logger>();
         }
 
+        /// <summary>
+        /// Add config files, kestrels etc.
+        /// </summary>
+        /// <param name="builder"></param>
         private static void RegisterConfigs(IConfigurationBuilder builder)
         {
             builder.AddJsonFile("appsettings.json", true, true);
         }
 
+        /// <summary>
+        /// Configure and register any services.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="services"></param>
         private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
         {
             // Map Configs
@@ -96,8 +109,7 @@ namespace IoC.DI.WinForm.Sample
                 options.Timeout = TimeSpan.FromMinutes(15);
             });
 
-            // Register Forms and Services
-            services.AddFormModule();
+            // Register Services + Forms
             services.AddServiceModules();
         }
     }

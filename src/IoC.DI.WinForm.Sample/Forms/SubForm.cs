@@ -1,5 +1,12 @@
 ﻿using IoC.DI.WinForm.Sample.Contracts;
+using IoC.DI.WinForm.Sample.Core.Helpers;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
+using System;
+using System.Diagnostics;
+using System.Threading;
 
 namespace IoC.DI.WinForm.Sample.Forms
 {
@@ -19,11 +26,16 @@ namespace IoC.DI.WinForm.Sample.Forms
 
         }
 
-        private async void BBI_GetEmployees_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void BBI_GetEmployees_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var result = await _employeeService.GetEmployeesAsync(50);
-            GC_Employees.DataSource = result.Data;
-            //GC_Employees.RefreshDataSource();
+            TimerHelper.Start(async () =>
+            {
+                var result = await _employeeService.GetEmployeesAsync(50);
+                GC_Employees.DataSource = result.Data;
+            });
+            TimerHelper.Stop();
+
+            Log.Information("Completed request in {elapsed} seconds.", TimerHelper.GetResultInSeconds());
         }
     }
 }
