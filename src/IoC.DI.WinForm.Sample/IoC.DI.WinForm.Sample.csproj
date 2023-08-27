@@ -5,6 +5,7 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<OutputPath>..\..\..\Outputs\$(SolutionName)\$(Configuration)</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
