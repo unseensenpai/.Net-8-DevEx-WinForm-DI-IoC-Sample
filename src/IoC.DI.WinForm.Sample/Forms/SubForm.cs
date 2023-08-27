@@ -19,9 +19,11 @@ namespace IoC.DI.WinForm.Sample.Forms
 
         }
 
-        private void BBI_GetEmployees_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private async void BBI_GetEmployees_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            var result = await _employeeService.GetEmployeesAsync(50);
+            GC_Employees.DataSource = result.Data;
+            //GC_Employees.RefreshDataSource();
         }
     }
 }

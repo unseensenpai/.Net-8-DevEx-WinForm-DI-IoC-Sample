@@ -36,7 +36,7 @@ namespace IoC.DI.WinForm.Sample
             string fileFormatter = "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
             string consoleFormatter = "{Timestamp:HH:mm} [{Level}] ({ThreadId}) {Message}{NewLine}{Exception}";
             Logger logConfig = new LoggerConfiguration()
-                .WriteTo.File( restrictedToMinimumLevel: LogEventLevel.Warning, formatter: new CompactJsonFormatter(), path: "Logs\\Log.json", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 100000000) // 100 MB
+                .WriteTo.File(restrictedToMinimumLevel: LogEventLevel.Warning, formatter: new CompactJsonFormatter(), path: "Logs\\Log.json", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 100000000) // 100 MB
                 .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information, outputTemplate: consoleFormatter)
                 .WriteTo.Udp(restrictedToMinimumLevel: LogEventLevel.Information, remoteAddress: "127.0.0.1", remotePort: 7071, family: AddressFamily.InterNetwork, outputTemplate: consoleFormatter)
                 .CreateLogger();
@@ -59,10 +59,10 @@ namespace IoC.DI.WinForm.Sample
                 .Build();
             IServiceProvider services = host.Services;
             Container container = services.GetRequiredService<Container>();
-            Application.Run(container);
             sw.Stop();
             var timerResult = Convert.ToDecimal(sw.ElapsedMilliseconds / 1000);
             Log.Information("WinForm DI Test Application Started!! Takes {timerResult} seconds to start!", timerResult);
+            Application.Run(container);
 
 
 
