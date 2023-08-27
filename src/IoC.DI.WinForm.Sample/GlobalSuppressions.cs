@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>", Scope = "member", Target = "~M:IoC.DI.WinForm.Sample.Container.BBI_SubForm_ItemClick(System.Object,DevExpress.XtraBars.ItemClickEventArgs)")]
+[assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>", Scope = "member", Target = "~M:IoC.DI.WinForm.Sample.Program.Main")]
